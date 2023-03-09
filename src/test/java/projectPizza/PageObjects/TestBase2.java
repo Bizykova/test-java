@@ -6,8 +6,10 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.IOException;
+import java.util.Map;
 
 
 public class TestBase2 {
@@ -17,27 +19,28 @@ public class TestBase2 {
         Configuration.browserSize = "1920x1080";
         Configuration.holdBrowserOpen = true;
         Configuration.browserPosition = "0x0";
+        Configuration.timeout = 8000;
     }
 
-    @BeforeAll
+        @BeforeAll
     @DisplayName("Инициализируем плагин Allure-Selenide")
     static void init() throws IOException {
         SelenideLogger.addListener("allure", new AllureSelenide());
-        //Configuration.timeout = 6000;
     }
 //    @BeforeAll
 //    @DisplayName("Инициализируем плагин Allure-Selenide")
-//    static void init(){
-//        SelenideLogger.addListener("allure",new AllureSelenide());
-//        Configuration.remote="http://85.119.145.3:4444/wd/hub/";
-//       // Configuration.browser="firefox";
-//        Configuration.browser="chrome";
+//    static void init() {
+//        SelenideLogger.addListener("allure", new AllureSelenide());
+//        Configuration.remote = "http://85.119.145.3:4444/wd/hub/";
+//
+//        // Configuration.browser="firefox";
+//        Configuration.browser = "chrome";
 //        //Configuration.browserVersion="95.0";
-//        Configuration.browserVersion="94.0";
+//        Configuration.browserVersion = "94.0";
 //
 //        var caps = new DesiredCapabilities();
-//        var options = Map.of("enableVnc",true,"enableVideo",true);
-//        caps.setCapability("selenoid:options",options);
+//        var options = Map.of("enableVnc", true, "enableVideo", true);
+//        caps.setCapability("selenoid:options", options);
 //        Configuration.browserCapabilities = caps;
 //    }
 }

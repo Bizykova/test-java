@@ -11,8 +11,10 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Link;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.open;
@@ -24,6 +26,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Epic("Регистрация пользователя оформление заказа")
 public class Tests2 extends TestBase2 {
     Menu menu = new Menu();
+    ChooseProduct chooseProduct = new ChooseProduct();
+    IncreaseAmount increaseAmount = new IncreaseAmount();
+    OrderReceived orderReceived = new OrderReceived();
+    Goods goods = new Goods();
+    Registration registration = new Registration();
+    AmountOfGoods amountOfGoods = new AmountOfGoods();
+    PaymentMethod paymentMethod = new PaymentMethod();
+    Agreement agreement = new Agreement();
+    PlaceOrder placeOrder = new PlaceOrder();
+    PaymentAmountWithIcon paymentAmountWithIcon = new PaymentAmountWithIcon();
+    UserGreeting userGreeting = new UserGreeting();
+    CreateOrder createOrder = new CreateOrder();
 
     @Test
     @DisplayName("Регистрация пользователя оформление заказа")
@@ -44,9 +58,9 @@ public class Tests2 extends TestBase2 {
             "15. Выбрать дату оформления заказа (на завтра) \n" +
             "16. Выбирать оплату по доставке \n" +
             "17. Подтвердили заказ\n" +
-            "18. Проверка: на странице появился элемент <<заказ получен>> \n"+
+            "18. Проверка: на странице появился элемент <<заказ получен>> \n" +
             "19. Общяя сумма заказа\n")
-    void buyPizza() {
+    void userRegistrationAndPurchaseProducts_Success() {
         //arrange
         open("http://pizzeria.skillbox.cc/");
         String pizza = " Пицца «Ветчина и грибы»";
@@ -56,44 +70,46 @@ public class Tests2 extends TestBase2 {
         String password = "qwerty123";
 
         //act
-        new ChooseProduct().pizzaToBasket(pizza);
-        new ChooseProduct().findProductInTheSearchField(cocoa);
+        chooseProduct.pizzaToBasket(pizza);
+        chooseProduct.findProductInTheSearchField(cocoa);
         menu.openMenu("Корзина");
 
         //assert
-        new AmountOfGoods().numberItemsInTheCart();
+        amountOfGoods.numberItemsInTheCart();
         assertEquals(new PaymentAmount().totalCost(), new SumOfGoods().checkTheSumOfItemInTheCart());
-        new PaymentAmountWithIcon().OrderAmountNextToTheIcon();
-        new Goods().ProductNameCheck();
+        paymentAmountWithIcon.OrderAmountNextToTheIcon();
+        goods.ProductNameCheck();
 
         //act
-        new IncreaseAmount().increaseAmountOfProductsInTheBasket("2");
+        increaseAmount.increaseAmountOfProductsInTheBasket("2");
 
         //assert
-        new AmountOfGoods().numberItemsInTheCart();
+        amountOfGoods.numberItemsInTheCart();
         sleep(2000);
         assertEquals(new PaymentAmount().totalCost(), new SumOfGoods().checkTheSumOfItemInTheCart());
 
         //act
         new PaymentAmount().buttonPaymentAmount.click();
         menu.openMenu("Мой аккаунт");
-        new Registration().userRegistration(userName, email, password);
+        registration.userRegistration(userName, email, password);
 
         //assert
-        new UserGreeting().greeting.shouldHave(text("Привет " + userName));
+        userGreeting.greeting.shouldHave(text("Привет " + userName));
 
         //act
         menu.openMenu("Оформление заказа");
-        new CreateOrder().createOrderFillWithYourData("Вася", "Печкин", "Russia",
+        createOrder.createOrderFillWithYourData("Вася", "Печкин", "Russia",
                 "ул.Кузьминки 43", "Москва", "Московская обл.", "500344", "89192345672");
-        new PaymentMethod().paymentMethod.click();
-        //Выбрать дату заказа на завтра
-//        new Calendar().selectOrderDate();
-        new Agreement().agreementCheckbox();
-        new PlaceOrder().placeOrder.click();
+        paymentMethod.paymentMethod.click();
+
+//      Выбрать дату заказа на завтра
+//      new Calendar().selectOrderDate();
+
+        agreement.agreementCheckbox();
+        placeOrder.placeOrders.click();
 
         //assert
-        new OrderReceived().orderReceived.shouldBe(visible);
+        orderReceived.orderReceivedt.shouldBe(visible);
 
     }
 }

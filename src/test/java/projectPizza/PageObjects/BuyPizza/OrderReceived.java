@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Selenide.$x;
 
 @Description("Проверка подтверждение заказа")
 public class OrderReceived {
-    public SelenideElement orderReceived = $x("//h2[@class='post-title']");
+    public SelenideElement orderReceivedt = $x("//h2[@class='post-title']");
 
 
 }

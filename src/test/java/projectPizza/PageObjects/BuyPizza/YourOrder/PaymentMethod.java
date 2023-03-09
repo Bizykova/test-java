@@ -10,7 +10,7 @@ public class PaymentMethod {
     public SelenideElement paymentMethod = $("#payment_method_cod");
 
     @Step("Клик на выбранный способ оплаты")
-    public void paymentMethod(){
+    public void paymentMethods(){
         paymentMethod.click();
     }
 }
