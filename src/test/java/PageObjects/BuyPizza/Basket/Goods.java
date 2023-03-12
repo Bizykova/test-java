@@ -1,4 +1,4 @@
-package projectPizza.PageObjects.BuyPizza.Basket;
+package PageObjects.BuyPizza.Basket;
 
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;

@@ -17,10 +17,6 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.screenshot;
 
 @Link(url = "https://go.skillbox.ru/", name = "Курс Selenide")
-@Issue("IDEA-260649/")
-@Issue("IDEA-241842")
-@TmsLink("IDEA-263680/")
-
 @Epic("Регистрация пользователя оформление заказа")
 @Feature("Регистрация")
 @Story("Покупка товара")

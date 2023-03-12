@@ -1,4 +1,4 @@
-package projectPizza.PageObjects.BuyPizza.CreateUserOrder;
+package PageObjects.BuyPizza.CreateUserOrder;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -36,4 +36,6 @@ public class CreateOrder {
         postcodeElement.setValue(post).click();
         phoneElement.setValue(phone).click();
     }
+
+
 }
